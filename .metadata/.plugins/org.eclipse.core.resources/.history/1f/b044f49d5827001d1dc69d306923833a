@@ -1,0 +1,8 @@
+
+public class Exam_03 {
+	public static void main(String[] args) {
+		System.out.print("안녕하세요");
+		System.out.println("자바수업시간입니다.");
+		System.out.println("점심이맛있었습니다");
+	}
+}

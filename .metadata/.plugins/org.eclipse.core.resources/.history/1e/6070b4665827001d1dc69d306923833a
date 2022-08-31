@@ -1,0 +1,8 @@
+
+public class Exam_03 {
+	public static void main(String[] args) {
+		System.out.print("æ»≥Á«œººø‰");
+		System.out.println("æ»≥Á«œººø‰");
+		System.out.println("æ»≥Á«œººø‰");
+	}
+}

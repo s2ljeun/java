@@ -1,0 +1,40 @@
+/*
+***** *****
+****   ****
+***     ***
+**       **
+*         *
+**       **
+***     ***
+****   ****
+***** *****
+i=1 *=5/1/5
+i=2 *=4/3/4
+i=3 *=3/5/3
+i=4 *=2/7/2
+i=5 *=1/9/1
+ */
+public class Exam_06 {
+	public static void main(String[] args) {
+		for(int i=1; i<=9; ++i) {
+			int co = 1;
+			if(i<=5) { // i = 1, 2, 3, 4, 5
+				++co;
+			} else { // i = 6, 7, 8, 9
+				--co;
+			}
+
+			for(int j=1; j<=6-co; ++j) { // * ÁÂÃø
+				System.out.print("*");
+			}
+			for(int k=1; k<=(co*2)-1; ++k) { // °ø¹é Âï±â
+				System.out.print(" ");
+			}
+			for(int u=1; u<=6-co; ++u) { // * ¿ìÃø
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+
+}

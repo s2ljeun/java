@@ -1,0 +1,33 @@
+/*
+ * up-down게임 반대
+ * 사용자가 1~100사이의 수를 선택하고 컴퓨터가 맞추는 게임
+ * 예를 들어 사용자가 75를 선택
+ * 1~100 사이의 수 랜덤: 50 1.up 2.down 3.정답: 1
+ * 51~100 사이의 수 랜덤: 80 1. up 2. down 3. 정답: 2
+ * 51~79 사이의 수 랜덤:
+ */
+import java.util.*;
+
+public class Exam_14 {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+
+		int num = (int)(Math.random()*10)+1;
+		int i = 0;
+		
+		while(true) {
+			System.out.print("컴퓨터의 정답: " + num);
+			++i;
+			System.out.print("1.up 2.down 3.정답");
+			int correct = in.nextInt();
+			if(correct == 1) { // 유저가 1을 고르면
+				num = (int)(Math.random()*10+1+num);
+			} else if(correct == 2) { // 유저가 2를 고르면
+				num = (int)(Math.random()*num+1-num);
+			} else if(correct == 3) break; // 유저가 3을 고르면
+		}
+		
+		System.out.printf("컴퓨터는 %d번만에 정답을 맞췄습니다.",i);
+	}
+
+}

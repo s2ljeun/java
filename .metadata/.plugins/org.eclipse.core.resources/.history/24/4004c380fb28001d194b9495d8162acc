@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+/*
+ * 가위바위보 게임 만들기
+ * 컴퓨터가 가위바위보 중 하나를 선택
+ * 사용자는 키보드로 선택을 해서 결과를 알려주는 프로그램
+ * 1.가위 2.바위 3.보 4.종료:
+ */
+public class Exam_15 {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		System.out.println("가위, 바위, 보!");
+		
+		while(true) {
+			System.out.println("1.가위 2.바위 3.보 4.종료");
+			int comsu = (int)(Math.random()*3)+1; // pc의 선택 가위, 바위, 보
+			int select = in.nextInt();
+			
+			if (select == 4) break;
+			else if (select == 1) { // 유저가 1.가위 선택하면
+				if (comsu == 2) System.out.println("패배"); // pc가 2. 바위
+				else if (comsu == 3) System.out.println("승리"); // pc가 3.보
+				else if (comsu == 1) System.out.println("비김"); // pc가 1.가위
+			
+			}else if (select == 2) { // 유저가 2. 바위 선택하면
+				if (comsu == 3) System.out.println("패배"); // pc가 3.보
+				else if (comsu == 1) System.out.println("승리"); // pc가 1.가위
+				else if (comsu == 2) System.out.println("비김"); // pc가 2.바위
+			
+			}else if (select == 3) { // 유저가 3. 보 선택하면
+				if (comsu == 1) System.out.println("패배"); // pc가 1.가위
+				else if (comsu == 2) System.out.println("승리"); // pc가 2.바위
+				else if (comsu == 3) System.out.println("비김"); // pc가 3.보
+			}
+
+			}
+		System.out.print("게임을 종료합니다.");
+		}
+	}

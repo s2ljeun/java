@@ -7,19 +7,20 @@ import java.util.Scanner;
 public class Exam_09 {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-
-		int i = 0;
 		int sum = 0;
+		int i = 0;
 		
 		while(true) {
-			System.out.print("수를 입력하세요: ");
+			System.out.print("수를 입력해주세요: ");
 			int num = in.nextInt();
-			if (num <= 0) break;
-			sum += num;
-			i++;
+
+			if (num <= 0) {
+				System.out.printf("총합: %d 평균: %.2f", sum, (float)sum/i);
+				break;
+			}
+			sum += num; // 입력 값 더하기
+			++i;
 		}
-		
-		System.out.printf("모든 값의 합은 %d, 평균값은 %.2f입니다.", sum, sum/(float)i); // float 형변환 필수
 	}
 	
 }

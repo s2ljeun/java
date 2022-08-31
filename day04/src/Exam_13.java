@@ -31,5 +31,20 @@ public class Exam_13 {
 			System.out.printf("%d번 만에 맞추셨습니다.",i);
 		}
 		
+//		//강사님 풀이
+//		int comsu = (int)(Math.random()*100)+1; // 1~100
+//		int co = 0;
+//
+//		while(true) {
+//			System.out.print("수를 입력: ");
+//			int su = in.nextInt();
+//			co++;
+//			if (su == comsu) break;
+//			else if (su < comsu) System.out.print("up");
+//			else System.out.print("down");
+//		}
+//		System.out.println(co + "번 만에 맞추셨습니다.");
+		
+		
 	}
 }

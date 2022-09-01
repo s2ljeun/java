@@ -33,7 +33,7 @@ public class Exam_14 {
 				break;
 			} else if (select == 1) { 		// 유저가 1. up을 선택하면
 				multi = (multi+plus-1) - su; // 앞의 범위를 늘리기 위해  multi값이 su가 되어야하는데? 그러면 뒤의 값도 올라가니까 -su를??
-				plus = su + 1; // plus는 최종 su값에 +1 해주는 역할이므로 su+1 ???ㅋㅋ
+				plus = su + 1; // plus는 최종 su값에 +1 해주는 역할이므로 su+1 ???
 			} else if (select == 2) { 		// 유저가 2. down을 선택하면
 				multi = su - plus;
 			} else {

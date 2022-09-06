@@ -2,4 +2,7 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="inner.Outer01.Inner01"/>
+<fullyQualifiedTypeName name="inner.Outer02.Inner02"/>
+<fullyQualifiedTypeName name="inner.Outer04"/>
 </qualifiedTypeNameHistroy>

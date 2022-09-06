@@ -1,8 +1,0 @@
-
-public class Exam_06 {
-	public static void main(String[] args) {
-		String name = "È«±æµ¿";
-		System.out.println("¾È³çÇÏ¼¼¿ä " + name + "´Ô, ¹Ý°©½À´Ï´Ù.");
-	}
-
-}

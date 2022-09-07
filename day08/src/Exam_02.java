@@ -5,6 +5,15 @@ class Member02{
 		this.name = name;
 		this.tel = tel;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setTel(String tel) {//setter 메소드
+		this.tel = tel;
+	}
+	public String getTel() {		//getter 메소드
+		return tel;
+	}
 	public void disp() {
 		System.out.println(name+"님의 전화번호는 " + tel +"번 입니다.");
 	}

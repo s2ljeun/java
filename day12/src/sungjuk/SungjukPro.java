@@ -1,6 +1,6 @@
-package member2;
+package sungjuk;
 
-public interface MemberPro {
+public interface SungjukPro {
 	public void insert();
 	public void view();
 	public void delete();

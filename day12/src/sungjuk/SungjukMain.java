@@ -1,11 +1,12 @@
-package member2;
+package sungjuk;
+
 import java.util.*;
 
-public class MemberMain {
+public class SungjukMain {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		
-		MemberPro pro = new MemberProImpl();
+		SungjukPro pro = new SungjukProImpl();
 		while(true) {
 			System.out.print("1.입력  2.출력  3.삭제  4.수정  5.종료 : ");
 			int select = in.nextInt();

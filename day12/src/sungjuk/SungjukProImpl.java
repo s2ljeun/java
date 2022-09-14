@@ -3,11 +3,11 @@ package sungjuk;
 import java.util.*;
 
 public class SungjukProImpl implements SungjukPro {
-	ArrayList<Student> hs;
+	HashSet hs;
 	Scanner in;
 	
 	public SungjukProImpl(){
-		hs = new ArrayList<>();
+		hs = new HashSet();
 		in = new Scanner(System.in);
 	}
 	
@@ -23,7 +23,10 @@ public class SungjukProImpl implements SungjukPro {
 	}
 	
 	protected Student isStudent(String name) {
-		for(Student s : hs) {
+		Iterator it = hs.iterator();
+		while(it.hasNext()) {
+			Object obj = it.next();
+			Student s = (Student)obj;
 			if (s.getName().equals(name)) {
 				return s;
 			}
@@ -45,15 +48,6 @@ public class SungjukProImpl implements SungjukPro {
 	}
 
 	protected void rank() {
-		for (Student rank : hs) {
-			rank.clearRank();
-			for(Student rank2 : hs) {
-				if (rank.getTot() < rank2.getTot()) {
-					rank.plusRank();
-				}
-			}
-		}
-		/*
 		Student[] rank = new Student[hs.size()];
 		hs.toArray(rank);
 		for(int i=0; i<rank.length; ++i) {
@@ -64,36 +58,19 @@ public class SungjukProImpl implements SungjukPro {
 				}
 			}
 		}
-		*/
 	}
 	
 	@Override
 	public void view() {
 		rank();
-		System.out.print("1.이름 2.국어 3.영어 4.총점 : ");
-		int select = in.nextInt();
-		if (select == 1) {
-			Collections.sort(hs);
-		}else {
-			Comparator<Student> comparator = getComparator(select);
-			Collections.sort(hs, comparator);
-		}
-		for(Student view : hs) {
+		Iterator it = hs.iterator();
+		while(it.hasNext()) {
+			Object obj = it.next();
+			Student view = (Student)obj;
 			view.disp();
 		}
 	}
-	protected Comparator<Student> getComparator(int select){
-		Comparator<Student> comparator = new Comparator<Student>() {
-			@Override
-			public int compare(Student o1, Student o2) {
-				if (select==2) return o2.getKor() - o2.getKor();
-				else if (select==3) return o2.getEng() - o2.getEng(); 
-				else return o2.getTot() - o1.getTot();
-			}
-		};
-		return comparator;
-	}
-	
+
 	@Override
 	public void delete() {
 		System.out.print("삭제할 학생의 이름을 입력 : ");

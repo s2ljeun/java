@@ -3,7 +3,6 @@ class MyFrame04 extends Frame{
 	
 	public MyFrame04(String title) {
 		super(title);
-		this.init();
 		
 		super.setSize(400, 300);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();

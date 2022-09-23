@@ -1,105 +1,56 @@
 package baseball;
-
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
-public class BaseballGUI extends Frame implements ActionListener {
+public class BaseballGUI extends Frame implements ActionListener{
+	private BaseballPro pro = new BaseballProImpl();
+	String team[] = pro.getTeam();
+	  
 	private Panel north_p = new Panel();
-	private Button[] north_bt = new Button[10];
-	private String[] club_str = new String[]{"SSG", "LG", "KT", "키움", "기아", "NC", "롯데", "삼성", "두산", "한화"};
-
-	private TextArea ta = new TextArea();
-	private String str = new String("선수\t\t\t연봉\n");
-
+	private Button team_bt[] = new Button[10];
+	private TextArea ta = new TextArea("팀을 선택해 주세요");
 	private Panel south_p = new Panel();
-	private Button input_bt = new Button("입력");
-	private Button edit_bt = new Button("수정");
-	private Button delete_bt = new Button("삭제");
-	private Button exit_bt = new Button("종료");
+	private Button menu_bt[] = new Button[4];
+	private String str[] = new String[] {"입력", "수정", "삭제", "종료"};
 	
-	private BaseballPro pro = new BaseballProImpl(); // 이게 뭐지 > proImpl 객체생성자 근데 왜 앞에는 pro?
+	private InputDialog inDlg = new InputDialog(this, "선수등록", true);
+	private EditDialog edDlg = new EditDialog(this, "선수수정", true);
+	private DeleteDialog deDlg = new DeleteDialog(this, "선수삭제", true);
 
-	private InputDialog indlg = new InputDialog(this, "입력", true);
-	private EditDialog eddlg = new EditDialog(this, "수정", true);
-	private DeleteDialog dtdlg = new DeleteDialog(this, "삭제", true);
-	
 	public void init() {
 		this.setLayout(new BorderLayout());
 		this.add("North", north_p);
-		north_p.setLayout(new GridLayout(1,5));
-		for(int i=0; i<north_bt.length; ++i) {
-			north_bt[i] = new Button();
-			north_p.add(north_bt[i]);
-			north_bt[i].setLabel(club_str[i]);
-			north_bt[i].addActionListener(this); //액션리스너
+		north_p.setLayout(new GridLayout(1, 10));
+		for(int i=0; i<team.length; ++i) {
+			team_bt[i] = new Button(team[i]);
+			north_p.add(team_bt[i]);
+			team_bt[i].addActionListener(this);
 		}
-		
-		this.add("Center", ta);
-		ta.setText(str);
-		
-		this.add("South", south_p);	
-		south_p.setLayout(new GridLayout(1,4));
-		south_p.add(input_bt);
-		
-		south_p.add(edit_bt);
-		south_p.add(delete_bt);
-		south_p.add(exit_bt);
-	}
-	
-	public void start() { //액션리스너 더하기
-		input_bt.addActionListener(this);
-		indlg.input_bt.addActionListener(this);
-		indlg.cancle_bt.addActionListener(this);
-
-		edit_bt.addActionListener(this);
-		eddlg.input_bt.addActionListener(this);
-		eddlg.cancle_bt.addActionListener(this);
-		
-		delete_bt.addActionListener(this);
-		dtdlg.delete_bt.addActionListener(this);
-
-		exit_bt.addActionListener(this);
-	}
-	
-
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		for(int i=0; i<north_bt.length; ++i) {
-			if(e.getSource() == north_bt[i]) {
-				ta.append(north_bt[i].getLabel() + "클릭\n");
-			}
-		}
-		
-		if(e.getSource() == input_bt) {
-			indlg.setVisible(true);
-		}  else if(e.getSource() == indlg.input_bt) { // 입력 - 확인
-			pro.insert();
-		} else if(e.getSource() == indlg.cancle_bt) { // 입력 - 취소
-			indlg.clearDialog();
-		} else if(e.getSource() == edit_bt) {
-			eddlg.setVisible(true);
-		} else if(e.getSource() == eddlg.input_bt) { // 수정 - 확인
-			System.out.print("선수 수정!");
-		} else if(e.getSource() == eddlg.cancle_bt) { // 수정 - 취소
-			eddlg.clearDialog();
-		} else if(e.getSource() == delete_bt) {
-			dtdlg.setVisible(true);
-		} else if(e.getSource() == dtdlg.delete_bt) { // 삭제 - 삭제
-			System.out.print("선수 삭제!");
-		} else if(e.getSource() == exit_bt) {
-			System.exit(0);
+		ta.setFont(new Font("", Font.PLAIN, 20));
+		this.add(ta);
+		this.add("South", south_p);
+		south_p.setLayout(new GridLayout(1, 4));
+		for(int i=0; i<str.length; ++i) {
+			menu_bt[i] = new Button(str[i]);
+			south_p.add(menu_bt[i]);
+			menu_bt[i].addActionListener(this);
 		}
 	}
-	
-		
+	public void start() {
+		inDlg.input_bt.addActionListener(this);
+		inDlg.cencle_bt.addActionListener(this);
+		edDlg.input_bt.addActionListener(this);
+		edDlg.cencle_bt.addActionListener(this);
+		deDlg.input_bt.addActionListener(this);
+		deDlg.cencle_bt.addActionListener(this);
+	}
 	
 	public BaseballGUI(String title) {
 		super(title);
-		this.start();
 		this.init();
-		
-		super.setSize(600, 400);
+		this.start();
+		super.setSize(800, 400);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		int xpos = (int)(screen.getWidth()/2) - this.getWidth()/2;
 		int ypos = (int)(screen.getHeight()/2) - this.getHeight()/2;
@@ -108,5 +59,75 @@ public class BaseballGUI extends Frame implements ActionListener {
 		
 		super.setVisible(true);
 	}
+	
+	protected void teamPlayerView(String team) {
+		ArrayList<Player> list = pro.view(team);
+		Collections.sort(list);
+		ta.setText(team+"을 선택하셨습니다\n");
+		ta.append("=========================\n");
+		ta.append("선수\t\t연봉\n");
+		ta.append("-------------------------\n");
+		for(Player p : list) {
+			ta.append(p.getName() + "\t\t" + p.getSalary()+"\n");
+		}
+	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==menu_bt[3]) {
+			System.exit(0);
+		}
+		for(int i=0; i<10; ++i) {
+			if (e.getSource()==team_bt[i]) {
+				String team = team_bt[i].getActionCommand();
+				teamPlayerView(team);
+				return;
+			}
+		}
+		if (e.getSource()==menu_bt[0]) {
+			inDlg.teamSetting(team);
+			inDlg.setVisible(true);
+		}else if (e.getSource()==menu_bt[1]) {
+			edDlg.teamSetting(team);
+			edDlg.setVisible(true);
+		}else if (e.getSource()==menu_bt[2]) {
+			deDlg.teamSetting(team);
+			deDlg.setVisible(true);
+		}if (e.getSource()==inDlg.input_bt) {
+			String name = inDlg.getName();
+			String team = inDlg.getTeam();
+			int salary = inDlg.getSalary();
+			Player p = new Player(name, team, salary);
+			pro.insert(p);
+			teamPlayerView(team);
+			inDlg.clearDialog();
+		}else if (e.getSource()==inDlg.cencle_bt) {
+			inDlg.clearDialog();
+		}if (e.getSource()==edDlg.input_bt) {
+			String name = edDlg.getName();
+			String team = edDlg.getTeam();
+			String tradeTeam = edDlg.getTradeTeam();
+			Player p = pro.getPlayer(name, team);
+			pro.trade(p, tradeTeam);
+			teamPlayerView(tradeTeam);
+			edDlg.clearDialog();
+		}else if (e.getSource()==edDlg.cencle_bt) {
+			edDlg.clearDialog();
+		}if (e.getSource()==deDlg.input_bt) {
+			String name = deDlg.getName();
+			String team = deDlg.getTeam();
+			pro.delete(team, name);
+			teamPlayerView(team);
+			deDlg.clearDialog();
+		}else if (e.getSource()==deDlg.cencle_bt) {
+			deDlg.clearDialog();
+		}
+		
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		new BaseballGUI("야구선수관리");
+	}
 }

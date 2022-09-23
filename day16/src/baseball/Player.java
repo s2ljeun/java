@@ -1,6 +1,6 @@
 package baseball;
 
-public class Player {
+public class Player implements Comparable<Player> {
 	private String name;
 	private String team;
 	private int salary;
@@ -29,6 +29,11 @@ public class Player {
 	
 	public void disp() {
 		System.out.printf("%s¥‘¿« ø¨∫¿¿∫ %dø¯ ¿‘¥œ¥Ÿ.\n", name, salary);
+	}
+
+	@Override
+	public int compareTo(Player o) {
+		return name.compareTo(o.getName());
 	}
 }
 

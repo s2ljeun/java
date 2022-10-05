@@ -7,7 +7,7 @@ public class Exam_04 {
 		InetAddress ia = InetAddress.getByName("localhost");
 		//getByName("localhost"); getByName("192.168.0.39");
 		
-		Socket soc = new Socket(ia, 12345); // 소켓 열기
+		Socket soc = new Socket(ia, 12345); // 소켓 열기 / 값이 들어올 때까지 대기
 		//객체를 만드려는 순간 ip주소와 포트번호를 가지고 서버로 가서 요청 > 응답 > 재응답 > 객체 완성
 		//클(라이언트)에서 서버에 접속을 요청할 때 위와 같이 객체를 생성한다.
 		//객체 생성시 서버와 통신을 주고 받는다.

@@ -1,3 +1,4 @@
+// TCP통신
 // 서버의 포트번호를 구하기 위해 서버소켓 만들기
 import java.io.*;
 import java.net.*;

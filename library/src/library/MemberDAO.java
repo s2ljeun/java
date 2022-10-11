@@ -76,6 +76,36 @@ public class MemberDAO { //Data Access Object, CRUD를 처리하는 클래스
 		return 0;
 	}
 	
+	//멤버 찾기 - id
+	public Member searchMember(String str) {
+		try {
+			con = DriverManager.getConnection(url, user, pass);
+			String sql = "select * from libMember where id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, str);
+
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				String id = rs.getString("id");
+				String name = rs.getString("name");
+				String pw = rs.getString("pw");
+				String tel = rs.getString("tel");
+				Member mb = new Member(id, name, pw, tel);
+				return mb;
+			}
+		}catch(SQLException e) {
+			System.err.println("search 메소드 실행 중 오류 발생!!");
+			e.printStackTrace();
+		}finally { //db닫기
+			try {
+				if (ps != null) ps.close();
+				if (con != null) con.close();
+				if (rs != null) rs.close();
+			}catch(SQLException e) {}
+		}
+		return null;
+	}
+	
 	
 
 }

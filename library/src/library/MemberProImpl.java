@@ -9,7 +9,6 @@ public class MemberProImpl implements MemberPro {
 	
 	public MemberProImpl() {
 		dao = new MemberDAO();
-		in = new Scanner(System.in);
 	}
 
 	@Override
@@ -33,21 +32,10 @@ public class MemberProImpl implements MemberPro {
 	}
 
 	@Override
-	public void view() {
-		// TODO Auto-generated method stub
-		
+	public Member view(String id) {
+		Member view = dao.searchMember(id);
+		return view;
 	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exit() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

@@ -81,10 +81,9 @@ public class LoginGUI extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(signUp_bt == e.getSource()) { //회원가입
-			// gui 띄우기
 			sudlg.setVisible(true);
-		} else if(sudlg.confirm_bt == e.getSource()) { //SignUpGUI의 확인버튼을 누르면
-			Member mb = sudlg.getMember(); //SignUpGUI에 적힌 멤버객체 받아오기
+		} else if(sudlg.confirm_bt == e.getSource()) { //회원가입dlg - 확인버튼
+			Member mb = sudlg.getMember();
 			int res = pro.insert(mb); //MemberProImpl의 insert 메소드에 멤버객체 넘겨주기
 			if (res>0) {
 				JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.", "", JOptionPane.INFORMATION_MESSAGE);
@@ -95,13 +94,16 @@ public class LoginGUI extends JFrame implements ActionListener{
 			}
 			
 		} else if(logIn_bt == e.getSource()) { //로그인
-			Member mb = this.getLogin(); //현재 창에 적힌 멤버객체 받아오기
+			Member mb = this.getLogin();
 			int res = pro.search(mb);//MemberProImpl의 search메소드에 멤버객체 넘겨주기
 			if (res>0) {
-				//mb에 아이디랑 패스워드 뿐이라 이름 찾아올 방법?
 				JOptionPane.showMessageDialog(null, mb.getId() + "님 환영합니다", "", JOptionPane.INFORMATION_MESSAGE);
 				this.clearDialog();
-				this.setVisible(false); // 로그인창이 보이지 않게
+				this.setVisible(false);
+				if(mb.getId().equals("admin")) { // 어드민id이면
+					AdminGUI gui = new AdminGUI(mb.getId());
+					return;
+				}
 				MemberGUI gui = new MemberGUI(mb.getId());
 			}else {
 				JOptionPane.showMessageDialog(null, "아이디와 패스워드를 확인해주세요.", "", JOptionPane.INFORMATION_MESSAGE);
